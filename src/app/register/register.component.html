@@ -1,0 +1,202 @@
+<h1 style="text-align: center;">User Registration</h1><br><br>
+<div class="container-fluid"><br>
+    <form [formGroup]="regForm" (ngSubmit)="onSubmit()" novalidate>
+        <!-- {{regForm.value|json}} -->
+
+        <div class="left">
+        
+            <input type='file' id="files" (change)="picked($event,1)" formControlName="image" style="display:none;">
+            <!-- <input type="file" id="files" class="hidden"/> --><h3>
+            <label for="files" class="butn">Upload <br> your photo</label></h3>
+
+             <!-- <input type='file' (change)="onSelectFile($event)" formControlName="image"> -->
+        </div>
+        <!-- <div class="vl">&nbsp;</div> -->
+        <div class="right">
+            <h5>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-5">
+                        <input type="name" class="form-control" placeholder="firstname"  formControlName="firstname">
+                        <div>
+                            <small class="text-danger"
+                                *ngIf="(regForm.controls.firstname.touched) && regForm.controls.firstname.errors?.required">
+                                First Name is required
+                            </small>
+                            <small class="text-danger" *ngIf="regForm.controls.firstname.errors?.maxlength"> 
+                                Name can be max 20 characters long.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="name" class="form-control" placeholder="lastname"  formControlName="lastname">
+                        <div>
+                            <small class="text-danger"
+                            *ngIf="(regForm.controls.lastname.touched) && regForm.controls.lastname.errors?.required">
+                            Last Name is required
+                        </small>
+                        <small class="text-danger" *ngIf="regForm.controls.lastname.errors?.maxlength"> 
+                           Last Name can be max 20 characters long.
+                        </small>
+                    </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Age</label>
+                    <div class="col-sm-10">
+                        <mat-slider [(ngModel)]="sliderValue" [min]="1" [max]="4" class="form-control-range"
+                            formControlName="age" [(ngModel)]="sliderValue">
+                        </mat-slider>
+                        <p> User Age: {{showAge()}}</p>
+                        </div>
+                </div>
+
+
+
+                
+                <div class="form-group row">
+                    <label class="col-sm-2 ">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                        <div *ngIf="!regForm.controls.email?.valid && (regForm.controls.email?.dirty
+                ||regForm.controls.email?.touched)">
+                            <small class="text-danger">email is not valid </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Tel</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Phone number" formControlName="phone">
+                        <div *ngIf="!regForm.controls.phone?.valid && (regForm.controls.phone?.dirty
+                ||regForm.controls.phone?.touched)">
+                            <small class="text-danger">phone number is not valid </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">State</label>
+                    <div class="col-sm-10">
+                        <select class="browser-default custom-select" formControlName="state">
+                            <option selected>Select state</option>
+                            <option value="Andhra pradesh">Andhra pradesh</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Tamilnadu">Tamilnadu</option>
+                        </select>
+                    </div>
+                </div> -->
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">State</label>
+                    <div class="col-sm-10">
+                        <select class="custom-select" [(ngModel)]='selectedstate' formControlName="state"> 
+                                <option *ngFor="let state of state" [selected]="selectedstate==state" value={{state}}>{{state}}</option> 
+                                
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Country</label>
+                    <div class="col-sm-10">
+                        <!-- <select class="browser-default custom-select" formControlName="country">
+                            <option selected>Select Country</option>
+                            <option value="India">India</option>
+                            <option value="Srilanka">Srilanka</option>
+                            <option value="Malaysia">Malaysia</option>
+                        </select> -->
+                        <select class="custom-select" [(ngModel)]='selectedcountry' formControlName="country"> 
+                            <option *ngFor="let country of country" [selected]="selectedcountry==country" value={{country}}>{{country}}</option> 
+                            
+                    </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Address</label>
+                    <div class="col-sm-10">
+                        <select class="browser-default custom-select" 
+                        formControlName="address" [(ngModel)]="selectedaddress">
+             
+                            <option selected>Select Address</option>
+                       
+                            <option *ngFor="let address of address" [selected]="selectedaddress==address" value={{address}}>{{address}}</option>
+                        </select>
+                    </div>
+                </div>
+                <ng-container *ngIf="selectedaddress == 'Home'">
+                    <div class="form-group">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Street</label>
+                            <div class="col-sm-10">
+                                <input type="text " class="form-control" formControlName="homestreet"
+                                    >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">City</label>
+                            <div class="col-sm-10">
+                                <input type="text " class="form-control" formControlName="homecity"
+                                    >
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="selectedaddress == 'Company'">
+                    <div class="form-group">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Building</label>
+                            <div class="col-sm-10">
+                                <input type="text " class="form-control" formControlName="compbuilding"
+                                   >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">City</label>
+                            <div class="col-sm-10">
+                                <input type="text " class="form-control" formControlName="compcity"
+                                    >
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+               
+                    
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Interest</label>
+                <div class="col-sm-10">
+                    <mat-form-field class="example-chip-list">
+                        <mat-chip-list #chipList aria-label="interest">
+                            <mat-chip *ngFor="let interest of regForm.get('interest').value; let i = index;" [selectable]="selectable" [removable]="removable" (removed)="remove(i)">
+                                {{interest}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="Interest..." formControlName="interest" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+                        </mat-chip-list>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            </h5>
+            <h6><br><br>
+                <div class="form-check form-check-inline" style="margin-left: 10%; ">
+                    <input type="checkbox" class="form-check-input" formControlName="subs">
+                    <label class="form-check-label">Subscribe to the news letter</label>
+                </div>
+            </h6>
+            <br>
+            <button class="btn btn-primary" type="submit" style="float: right;"
+                [disabled]="!regForm.valid">Submit</button><br>
+        </div>
+        <br>
+
+        <br>
+        <!-- <button type="button" (click)="setValue()">SetValue</button> -->
+        <!-- {{regForm.value|json}} -->
+    </form>
+    <!-- <a href="/display">display</a> -->
+</div>

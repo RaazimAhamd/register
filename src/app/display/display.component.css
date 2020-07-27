@@ -1,0 +1,32 @@
+.container-fluid{
+    width: 80%;
+}
+.left{
+    width: 12%;
+    float: left;
+    margin-right: 5%;
+ }
+ .vl {
+    border-right: 2px solid green;
+    height: 500px;
+    width: 1%;
+    float: left;
+  }
+.right{
+    width: auto;
+    float: clear;
+    /* float: right; */
+    /* margin-left: 10%; */
+    padding-left:20%;
+}
+.txt{
+    color: skyblue;
+}
+.butn{
+    /* margin-left: 23%; 
+    margin-top: 32%; */
+    color:#007bff;
+    text-align: center;
+    text-decoration: underline;
+    /* font-size: 180%; */
+  }

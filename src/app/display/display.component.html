@@ -1,0 +1,31 @@
+<h1 style="text-align: center;">user details</h1><br><br>
+<div class="container-fluid"><br>
+    <div class="left">
+        <div *ngIf="!isUrl">
+            <img [src]="dispimage" width="150px" height="150px">
+        </div>
+        <div *ngIf="isUrl">
+            <img [src]="url" width="150px" height="150px">
+        </div>
+        <input type='file' id="imgfile" (change)="onSelectFile($event)" style="display:none;">
+        <label for="imgfile" class="butn">Edit photo</label>
+
+        <br>
+        <!-- <u> <a href="/register" onclick="setValue()">Edit profile</a></u> -->
+        <button (click)="editForm()" class="btn btn-primary" id="edit" style="display: none;">Edit profile</button>
+        <label for="edit" class="butn">Edit profile</label>
+
+    </div>
+    <div class="vl">&nbsp;</div>
+    <div class="right">
+        <p>I am <span class="txt">{{user.firstname}} {{user.lastname}}</span> and I am <span
+                class="txt">{{showAge()}}</span> and you can send your emails to {{user.email}}
+            I lives in the state of <span class="txt">{{user.state}}</span>. I like to <span
+                class="txt">{{user.interest}}</span>. And please send me
+            the news letters. Please reach out to me on <span class="txt">{{user.phone}}</span>.</p><br><br>
+
+
+        <input type="button" value="Agree" onclick="setValue()" style="width: 20%;"> <br><br>
+
+    </div>
+</div>

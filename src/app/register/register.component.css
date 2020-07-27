@@ -1,0 +1,36 @@
+.container-fluid{
+    width: 80%;
+}
+.left{
+    width: 12%;
+    float: left;
+    margin-right: 5%;
+    height: 150px;
+    width: 150px;
+    background-color: skyblue;
+}
+.right{
+    width: auto;
+    float: left;
+    margin-left: 5%;
+}
+.mat-slider {
+    width: 100%;
+  }
+.example-chip-list {
+    width: 100%;
+  }
+  .butn{
+    margin-left: 23%; 
+    margin-top: 32%;
+    color: white;
+    text-align: center;
+    text-decoration: underline;
+    /* font-size: 180%; */
+  }
+  
+/* .vl {
+    border-left: 2px solid green;
+    height: 500px;
+  } */
+
